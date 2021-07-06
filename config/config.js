@@ -71,6 +71,14 @@ export default defineConfig({
               path: '/',
               redirect: '/dashboard/analysis',
             },
+            // 配置 app2 关联的路由
+            {
+              path: '/microApp',
+              microApp: 'app1',
+              name: 'app',
+              icon: 'dashboard',
+              component: '/app/index.js',
+            },
             {
               path: '/dashboard',
               name: 'dashboard',
@@ -333,4 +341,15 @@ export default defineConfig({
     basePath: '/',
   },
   esbuild: {},
+  qiankun: {
+    master: {
+      // 注册子应用信息
+      apps: [
+        {
+          name: 'app1', // 唯一 id
+          entry: '//localhost:8010/microApp', // html entry
+        },
+      ],
+    },
+  },
 });
